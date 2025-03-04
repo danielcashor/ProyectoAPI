@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: tu-servicio
+    buildCommand: |
+      curl -sS https://getcomposer.org/installer | php
+      php composer.phar install
+    startCommand: php -S 0.0.0.0:10000 -t public/
+    env: php
+    plan: free
