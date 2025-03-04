@@ -1,14 +1,11 @@
-# Usa una imagen oficial de PHP
-FROM php:8.0-apache
+# Usamos una imagen base de PHP con Apache
+FROM php:7.4-apache
 
-# Copia tu código a la carpeta del contenedor
-COPY . /var/www/html/
+# Copiamos todos los archivos del proyecto al contenedor
+COPY . /var/www/html
 
-# Habilita el módulo de reescritura de Apache
-RUN a2enmod rewrite
+# Establecemos el directorio de trabajo
+WORKDIR /var/www/html
 
-# Establece el puerto del contenedor
-EXPOSE 80
-
-# Inicia Apache cuando el contenedor se ejecute
-CMD ["apache2-foreground"]
+# Asignamos los permisos correctos para la carpeta html y subcarpetas
+RUN chown -R www-data:www-data /var/www/html
