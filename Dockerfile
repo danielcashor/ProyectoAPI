@@ -1,5 +1,5 @@
-# Usamos una imagen base de PHP con Apache
-FROM php:8.0-apache
+# Usamos una imagen base de PHP con Apache (actualizada a PHP 8.2)
+FROM php:8.2-apache
 
 # Instalamos las extensiones necesarias para Laravel
 RUN apt-get update && apt-get install -y \
@@ -29,7 +29,7 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available
 RUN a2enmod rewrite
 
 # Instalamos las dependencias de Laravel
-RUN composer install --optimize-autoloader --prefer-dist --no-interaction --no-progress
+RUN composer install --optimize-autoloader --prefer-dist --no-interaction
 
 # Asignamos los permisos correctos para Laravel
 RUN chown -R www-data:www-data /var/www/html && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
